@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F4702A;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#E8720C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C55E08;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.18);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="230" ry="230" fill="url(#bg)"/>
+  <!-- Shine overlay -->
+  <rect width="1024" height="512" rx="0" ry="0" fill="url(#shine)"/>
+  <rect width="1024" height="512" rx="230" ry="230" fill="url(#shine)"/>
+  <!-- "45" text -->
+  <text
+    x="512"
+    y="620"
+    font-family="'Bricolage Grotesque', 'Arial Black', 'Helvetica Neue', sans-serif"
+    font-size="480"
+    font-weight="800"
+    fill="white"
+    text-anchor="middle"
+    letter-spacing="-28"
+    style="opacity:0.96"
+  >45</text>
+</svg>

@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Micro Meet NYC — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --indigo: #3B3EFF;
+    --indigo-light: #EEEEFF;
+    --lime: #B4F000;
+    --white: #FFFFFF;
+    --black: #111111;
+    --gray: #6B6B6B;
+    --divider: #EEEEEE;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 8px;
+    --phone-w: 390px;
+    --phone-h: 844px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0F0F4;
+    min-height: 100vh;
+    padding: 48px 32px;
+  }
+
+  h1.page-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+  h2.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  /* Screen grid */
+  .screens-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: flex-start;
+  }
+
+  /* Phone frame */
+  .screen-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .screen-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .phone {
+    width: var(--phone-w);
+    height: var(--phone-h);
+    background: var(--white);
+    border-radius: 48px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
+  }
+  /* Notch */
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 34px;
+    background: var(--black);
+    border-radius: 0 0 24px 24px;
+    z-index: 100;
+  }
+
+  .screen {
+    width: 100%;
+    height: 100%;
+    padding: 56px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+    font-family: 'DM Mono', monospace;
+  }
+  .status-icons { display: flex; gap: 6px; align-items: center; }
+  .status-icons span { font-size: 11px; }
+
+  /* Typography */
+  .headline { font-size: 32px; font-weight: 700; color: var(--black); line-height: 1.1; }
+  .headline-lg { font-size: 48px; font-weight: 800; color: var(--black); line-height: 1.0; }
+  .body-text { font-size: 16px; color: var(--gray); line-height: 1.6; margin-top: 12px; }
+  .label { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray); }
+
+  /* Buttons */
+  .btn-primary {
+    background: var(--indigo);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 100px;
+    padding: 18px 24px;
+    width: 100%;
+    cursor: pointer;
+    letter-spacing: -0.01em;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    padding: 14px 24px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--indigo);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid var(--indigo);
+    border-radius: 100px;
+    padding: 16px 24px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .btn-disabled {
+    background: var(--divider);
+    color: #AAAAAA;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 100px;
+    padding: 18px 24px;
+    width: 100%;
+    cursor: not-allowed;
+  }
+  .btn-lime {
+    background: var(--lime);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 100px;
+    padding: 18px 24px;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  /* Chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 100px;
+    border: 1.5px solid var(--divider);
+    background: white;
+    color: var(--black);
+    cursor: pointer;
+  }
+  .chip.selected {
+    background: var(--indigo);
+    border-color: var(--indigo);
+    color: white;
+  }
+
+  /* Cards */
+  .user-card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--divider);
+    padding: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .user-card + .user-card { margin-top: 12px; }
+  .avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--indigo-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .card-info { flex: 1; }
+  .card-name { font-size: 17px; font-weight: 700; color: var(--black); }
+  .card-meta { font-size: 13px; color: var(--gray); margin-top: 2px; display: flex; gap: 8px; align-items: center; }
+  .dot { width: 3px; height: 3px; background: var(--gray); border-radius: 50%; }
+  .card-intent {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--indigo-light);
+    color: var(--indigo);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-top: 8px;
+  }
+  .card-avail {
+    font-size: 12px;
+    color: #22C55E;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .badges { display: flex; gap: 4px; margin-top: 8px; }
+  .badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+  .badge-phone { background: #E8FFF0; }
+  .badge-id { background: #E8F0FF; }
+  .badge-school { background: #FFF8E8; }
+  .badge-work { background: #F0E8FF; }
+  .req-btn {
+    background: var(--indigo);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    align-self: flex-end;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* Floating available btn */
+  .fab {
+    position: absolute;
+    bottom: 32px;
+    left: 24px;
+    right: 24px;
+    background: var(--black);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 100px;
+    padding: 20px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .fab-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--lime);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.3); }
+  }
+
+  /* Verification rows */
+  .verify-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--divider);
+    background: white;
+    margin-top: 12px;
+  }
+  .verify-icon { font-size: 22px; }
+  .verify-info { flex: 1; }
+  .verify-title { font-size: 15px; font-weight: 600; color: var(--black); }
+  .verify-sub { font-size: 13px; color: var(--gray); margin-top: 2px; }
+  .check-circle {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--divider);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .check-circle.checked {
+    background: var(--indigo);
+    border-color: var(--indigo);
+    color: white;
+    font-size: 12px;
+  }
+
+  /* Timer */
+  .timer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--indigo);
+    color: white;
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
+  }
+  .timer-label { font-size: 13px; font-weight: 500; opacity: 0.8; }
+  .timer-value { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; letter-spacing: 0.05em; }
+  .timer-progress {
+    height: 3px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .timer-fill {
+    height: 100%;
+    width: 65%;
+    background: var(--lime);
+    border-radius: 2px;
+  }
+
+  /* Chat bubbles */
+  .chat-area { flex: 1; overflow-y: auto; padding: 8px 0; display: flex; flex-direction: column; gap: 12px; }
+  .bubble {
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .bubble-them {
+    background: var(--divider);
+    color: var(--black);
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+  }
+  .bubble-me {
+    background: var(--indigo);
+    color: white;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+  .chat-time { font-size: 11px; color: var(--gray); text-align: center; }
+  .chat-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #F8F8F8;
+    border-radius: 100px;
+    margin-top: 12px;
+  }
+  .chat-input-text { flex: 1; font-size: 15px; color: var(--gray); font-family: 'DM Sans', sans-serif; }
+  .send-btn {
+    width: 36px; height: 36px;
+    background: var(--indigo);
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Top nav */
+  .top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .nav-title { font-size: 20px; font-weight: 700; color: var(--black); }
+  .icon-btn {
+    width: 40px; height: 40px;
+    background: #F4F4F4;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  /* Match card */
+  .match-card {
+    background: var(--indigo);
+    border-radius: 24px;
+    padding: 32px 24px;
+    text-align: center;
+    color: white;
+    margin: 16px 0;
+  }
+  .match-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    border: 3px solid rgba(255,255,255,0.4);
+  }
+  .match-name { font-size: 28px; font-weight: 700; }
+  .match-detail { font-size: 15px; opacity: 0.8; margin-top: 6px; }
+  .match-pills { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .match-pill {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+
+  /* Safety screen */
+  .safe-option {
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--divider);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+  }
+  .safe-option + .safe-option { margin-top: 12px; }
+  .safe-icon { font-size: 28px; }
+  .safe-title { font-size: 17px; font-weight: 700; color: var(--black); }
+  .safe-sub { font-size: 14px; color: var(--gray); margin-top: 2px; }
+  .safe-option.good { border-color: #22C55E; background: #F0FFF4; }
+  .safe-option.report { border-color: #EF4444; background: #FFF5F5; }
+  .safe-option.good .safe-icon { color: #22C55E; }
+  .safe-option.report .safe-icon { color: #EF4444; }
+
+  /* Profile */
+  .profile-photo {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: var(--indigo-light);
+    margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    border: 3px solid white;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .profile-name { text-align: center; font-size: 24px; font-weight: 700; color: var(--black); }
+  .profile-bio { text-align: center; font-size: 15px; color: var(--gray); margin-top: 6px; }
+  .rating-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .star { color: #F59E0B; font-size: 16px; }
+  .rating-num { font-size: 15px; font-weight: 600; color: var(--black); margin-left: 4px; }
+  .rating-count { font-size: 13px; color: var(--gray); }
+  .profile-section { margin-top: 20px; }
+  .profile-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 10px;
+  }
+  .trust-badges-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #F4F4F8;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .trust-badge.active { background: var(--indigo-light); color: var(--indigo); }
+
+  /* Filter bottom sheet */
+  .sheet-handle {
+    width: 36px; height: 4px;
+    background: var(--divider);
+    border-radius: 2px;
+    margin: 0 auto 20px;
+  }
+  .sheet-section { margin-bottom: 24px; }
+  .sheet-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 12px;
+  }
+  .slider-track {
+    height: 4px;
+    background: var(--divider);
+    border-radius: 2px;
+    position: relative;
+    margin: 12px 0;
+  }
+  .slider-fill {
+    position: absolute;
+    left: 10%;
+    width: 60%;
+    height: 100%;
+    background: var(--indigo);
+    border-radius: 2px;
+  }
+  .slider-thumb {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 20px; height: 20px;
+    background: white;
+    border: 2px solid var(--indigo);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .slider-thumb:first-of-type { left: 10%; margin-left: -10px; }
+  .slider-thumb:last-of-type { left: 70%; margin-left: -10px; }
+  .slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray); font-weight: 500; }
+  .time-options { display: flex; gap: 8px; }
+  .time-option {
+    flex: 1;
+    padding: 12px 8px;
+    text-align: center;
+    border-radius: var(--radius-xs);
+    border: 1.5px solid var(--divider);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray);
+  }
+  .time-option.active {
+    border-color: var(--indigo);
+    background: var(--indigo-light);
+    color: var(--indigo);
+  }
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+  }
+  .toggle-row + .toggle-row { border-top: 1px solid var(--divider); }
+  .toggle-label { font-size: 15px; font-weight: 500; color: var(--black); }
+  .toggle {
+    width: 46px; height: 26px;
+    border-radius: 100px;
+    background: var(--indigo);
+    position: relative;
+    cursor: pointer;
+  }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    width: 20px; height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 3px; right: 3px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  /* Splash */
+  .splash-logo {
+    font-size: 96px;
+    font-weight: 800;
+    color: var(--indigo);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .splash-tagline {
+    font-size: 18px;
+    color: var(--gray);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* Scrollable content */
+  .scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .scroll-area::-webkit-scrollbar { display: none; }
+
+  /* Back button */
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--indigo);
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  /* Progress dots */
+  .progress-dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .pdot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--divider);
+  }
+  .pdot.active {
+    width: 20px;
+    border-radius: 3px;
+    background: var(--indigo);
+  }
+
+  /* Report btn */
+  .report-btn {
+    background: #FFF5F5;
+    color: #EF4444;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    border-radius: 100px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Micro Meet NYC</h1>
+<h2 class="section-title">Mobile UI Design System</h2>
+
+<div class="screens-grid">
+
+  <!-- 1. SPLASH -->
+  <div class="screen-wrap">
+    <div class="screen-label">01 · Splash</div>
+    <div class="phone">
+      <div class="screen" style="justify-content: center; align-items: center; text-align: center; gap: 0;">
+        <div class="splash-logo">45</div>
+        <div class="splash-tagline">45 minutes.<br>Nearby. No pressure.</div>
+        <div style="flex: 1;"></div>
+        <button class="btn-primary" style="margin-bottom: 0;">Get Started</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ONBOARDING: LOCATION -->
+  <div class="screen-wrap">
+    <div class="screen-label">02 · Location</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>⬛</span></div>
+        </div>
+        <div class="progress-dots">
+          <div class="pdot active"></div>
+          <div class="pdot"></div>
+          <div class="pdot"></div>
+        </div>
+        <div style="font-size: 64px; margin-bottom: 20px; text-align: center;">📍</div>
+        <div class="headline">Find people<br>near you.</div>
+        <div class="body-text">We use your location to show available meetups within walking distance.</div>
+        <div style="flex: 1;"></div>
+        <button class="btn-primary" style="margin-bottom: 12px;">Enable Location</button>
+        <button class="btn-secondary">Not Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. ONBOARDING: INTENT -->
+  <div class="screen-wrap">
+    <div class="screen-label">03 · Intent</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>⬛</span></div>
+        </div>
+        <div class="progress-dots">
+          <div class="pdot"></div>
+          <div class="pdot active"></div>
+          <div class="pdot"></div>
+        </div>
+        <div class="headline">What are you<br>up for?</div>
+        <div class="body-text" style="font-size: 14px;">Pick up to 3</div>
+        <div class="chips" style="margin-top: 20px;">
+          <div class="chip selected">☕ Coffee</div>
+          <div class="chip">📚 Study</div>
+          <div class="chip selected">🚶 Walk</div>
+          <div class="chip">💻 Work Sprint</div>
+          <div class="chip">🏋️ Gym</div>
+          <div class="chip selected">🌐 Language</div>
+          <div class="chip">💬 Quick Chat</div>
+        </div>
+        <div style="flex: 1;"></div>
+        <button class="btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. ONBOARDING: VERIFICATION -->
+  <div class="screen-wrap">
+    <div class="screen-label">04 · Verify</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>⬛</span></div>
+        </div>
+        <div class="progress-dots">
+          <div class="pdot"></div>
+          <div class="pdot"></div>
+          <div class="pdot active"></div>
+        </div>
+        <div class="headline">Build trust.</div>
+        <div class="body-text" style="font-size: 14px;">Verification helps everyone feel safe.</div>
+        <div style="margin-top: 24px;">
+          <div class="verify-row">
+            <div class="verify-icon">📱</div>
+            <div class="verify-info">
+              <div class="verify-title">Phone verified</div>
+              <div class="verify-sub">Required to use the app</div>
+            </div>
+            <div class="check-circle checked">✓</div>
+          </div>
+          <div class="verify-row">
+            <div class="verify-icon">🛂</div>
+            <div class="verify-info">
+              <div class="verify-title">ID verification</div>
+              <div class="verify-sub">Earn Trust Badge</div>
+            </div>
+            <div class="check-circle"></div>
+          </div>
+          <div class="verify-row">
+            <div class="verify-icon">🎓</div>
+            <div class="verify-info">
+              <div class="verify-title">Work/School email</div>
+              <div class="verify-sub">Adds verified badge</div>
+            </div>
+            <div class="check-circle"></div>
+          </div>
+        </div>
+        <div style="flex: 1;"></div>
+        <button class="btn-primary" style="margin-bottom: 12px;">Verify Phone</button>
+        <button class="btn-secondary">Skip for now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. HOME -->
+  <div class="screen-wrap">
+    <div class="screen-label">05 · Home</div>
+    <div class="phone">
+      <div class="screen" style="padding-bottom: 0;">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>⬛</span></div>
+        </div>
+        <div class="top-nav">
+          <div class="nav-title">Near you</div>
+          <div style="display:flex;gap:8px;">
+            <div class="icon-btn">🔔</div>
+            <div class="icon-btn">⚙️</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <div style="flex:1;background:#F4F4F8;border-radius:100px;padding:10px 16px;font-size:14px;color:var(--gray);">🔍 Filter by intent, distance…</div>
+          <div style="padding:10px 14px;background:var(--indigo);border-radius:100px;color:white;font-size:13px;font-weight:600;">Filter</div>
+        </div>
+        <div class="scroll-area" style="padding-bottom: 100px;">
+          <!-- Card 1 -->
+          <div class="user-card">
+            <div class="avatar">👩</div>
+            <div class="card-info">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div class="card-name">Maya</div>
+                <button class="req-btn">Request</button>
+              </div>
+              <div class="card-meta">
+                <span>0.4 mi away</span>
+                <div class="dot"></div>
+                <span>Columbia</span>
+              </div>
+              <div class="card-intent">☕ Coffee</div>
+              <div class="card-avail">● Available now · 45 min</div>
+              <div class="badges">
+                <div class="badge badge-phone">📱</div>
+                <div class="badge badge-id">🛂</div>
+                <div class="badge badge-school">🎓</div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="user-card">
+            <div class="avatar">👨</div>
+            <div class="card-info">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div class="card-name">James</div>
+                <button class="req-btn">Request</button>
+              </div>
+              <div class="card-meta">
+                <span>0.8 mi away</span>
+                <div class="dot"></div>
+                <span>Freelancer</span>
+              </div>
+              <div class="card-intent">💻 Work Sprint</div>
+              <div class="card-avail">● Available now · 45 min</div>
+              <div class="badges">
+                <div class="badge badge-phone">📱</div>
+                <div class="badge badge-work">💼</div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="user-card">
+            <div class="avatar">👩</div>
+            <div class="card-info">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div class="card-name">Priya</div>
+                <button class="req-btn">Request</button>
+              </div>
+              <div class="card-meta">
+                <span>1.1 mi away</span>
+                <div class="dot"></div>
+                <span>NYU</span>
+              </div>
+              <div class="card-intent">🚶 Walk</div>
+              <div class="card-avail" style="color:#F59E0B;">◌ Available in 20 min</div>
+              <div class="badges">
+                <div class="badge badge-phone">📱</div>
+                <div class="badge badge-id">🛂</div>
+                <div class="badge badge-school">🎓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="fab">
+          <div class="fab-dot"></div>
+          I'm Available Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. FILTER -->
+  <div class="screen-wrap">
+    <div class="screen-label">06 · Filter</div>
+    <div class="phone">
+      <div class="screen" style="justify-content: flex-end; padding: 0; background: rgba(0,0,0,0.3);">
+        <div style="background:white;border-radius:32px 32px 0 0;padding:20px 24px 40px;">
+          <div class="sheet-handle"></div>
+          <div class="nav-title" style="margin-bottom:20px;">Filter</div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Distance</div>
+            <div class="slider-track">
+              <div class="slider-fill"></div>
+              <div class="slider-thumb" style="left:10%;margin-left:-10px;"></div>
+              <div class="slider-thumb" style="left:70%;margin-left:-10px;"></div>
+            </div>
+            <div class="slider-labels"><span>0.5 mi</span><span>2 mi</span></div>
+          </div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Intent</div>
+            <div class="chips">
+              <div class="chip selected">☕ Coffee</div>
+              <div class="chip">📚 Study</div>
+              <div class="chip selected">🚶 Walk</div>
+              <div class="chip">💻 Work</div>
+              <div class="chip">💬 Chat</div>
+            </div>
+          </div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Time</div>
+            <div class="time-options">
+              <div class="time-option active">Now</div>
+              <div class="time-option">Tonight</div>
+              <div class="time-option">This Week</div>
+            </div>
+          </div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Trust Level</div>
+            <div class="toggle-row">
+              <span class="toggle-label">Verified only</span>
+              <div class="toggle"></div>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-label">ID verified only</span>
+              <div class="toggle" style="background:var(--divider);"></div>
+            </div>
+          </div>
+
+          <button class="btn-primary">Apply Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. MATCH CONFIRMED -->
+  <div class="screen-wrap">
+    <div class="screen-label">07 · Match</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>⬛</span></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+          <div class="label" style="text-align:center;margin-bottom:8px;">It's a match</div>
+          <div class="match-card">
+            <div class="match-avatar">👩</div>
+            <div class="match-name">You're meeting Maya</div>
+            <div class="match-detail">Columbia · 0.3 miles away</div>
+            <div class="match-pills">
+              <div class="match-pill">☕ Coffee</div>
+              <div class="match-pill">45 min session</div>
+              <div class="match-pill">📱 🛂 🎓</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-primary" style="margin-bottom:12px;">Start Chat</button>
+        <button class="btn-secondary" style="color:#EF4444;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. CHAT -->
+  <div class="screen-wrap">
+    <div class="screen-label">08 · Chat</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>⬛</span></div>
+        </div>
+        <div class="top-nav">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="avatar" style="width:36px;height:36px;font-size:16px;">👩</div>
+            <div>
+              <div style="font-size:16px;font-weight:700;color:var(--black);">Maya</div>
+              <div style="font-size:12px;color:#22C55E;">● Online</div>
+            </div>
+          </div>
+          <button class="report-btn">Report</button>
+        </div>
+
+        <div class="timer-bar">
+          <div>
+            <div class="timer-label">Session ends in</div>
+            <div class="timer-value">29:14</div>
+          </div>
+          <div style="flex:1;margin:0 16px;">
+            <div class="timer-progress"><div class="timer-fill"></div></div>
+          </div>
+          <div style="font-size:12px;font-weight:600;opacity:0.8;">45 min</div>
+        </div>
+
+        <div class="chat-area">
+          <div class="chat-time">Today 9:41 AM</div>
+          <div class="bubble bubble-them">Hey! Are you near the Starbucks on 79th?</div>
+          <div class="bubble bubble-me">Yes! Be there in 3 mins ☕</div>
+          <div class="bubble bubble-them">Perfect, I'll grab a table. See you soon!</div>
+        </div>
+
+        <div class="chat-input">
+          <div class="chat-input-text">Type a message…</div>
+          <button class="send-btn">↑</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. SAFETY CHECK -->
+  <div class="screen-wrap">
+    <div class="screen-label">09 · Safety</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>⬛</span></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+          <div style="text-align:center;margin-bottom:32px;">
+            <div style="font-size:64px;margin-bottom:16px;">🛡</div>
+            <div class="headline">Are you safe?</div>
+            <div class="body-text">Session with Maya just ended.<br>How did it go?</div>
+          </div>
+          <div class="safe-option good">
+            <div class="safe-icon">✅</div>
+            <div>
+              <div class="safe-title">I'm good</div>
+              <div class="safe-sub">Rate and close session</div>
+            </div>
+          </div>
+          <div class="safe-option report">
+            <div class="safe-icon">🚨</div>
+            <div>
+              <div class="safe-title">Report an issue</div>
+              <div class="safe-sub">We'll follow up immediately</div>
+            </div>
+          </div>
+        </div>
+        <!-- Star rating -->
+        <div style="text-align:center;margin-top:24px;">
+          <div class="label" style="margin-bottom:10px;">Rate your experience</div>
+          <div style="font-size:32px;letter-spacing:4px;">★★★★☆</div>
+        </div>
+        <button class="btn-primary" style="margin-top:20px;">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. PROFILE -->
+  <div class="screen-wrap">
+    <div class="screen-label">10 · Profile</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="status-icons"><span>●●●</span><span>WiFi</span><span>⬛</span></div>
+        </div>
+        <div class="top-nav">
+          <div class="nav-title">Profile</div>
+          <div class="icon-btn" style="font-size:14px;color:var(--indigo);width:auto;padding:8px 14px;border-radius:100px;background:var(--indigo-light);font-weight:600;">Edit</div>
+        </div>
+        <div class="scroll-area">
+          <div class="profile-photo">👩</div>
+          <div class="profile-name">Maya</div>
+          <div class="profile-bio">Columbia grad student. Love coffee chats and long walks.</div>
+          <div class="rating-display">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color:#DDD;">★</span>
+            <span class="rating-num">4.8</span>
+            <span class="rating-count">(24 meets)</span>
+          </div>
+
+          <div class="profile-section">
+            <div class="profile-section-title">Intents</div>
+            <div class="chips">
+              <div class="chip selected" style="font-size:13px;padding:8px 14px;">☕ Coffee</div>
+              <div class="chip selected" style="font-size:13px;padding:8px 14px;">🚶 Walk</div>
+              <div class="chip selected" style="font-size:13px;padding:8px 14px;">📚 Study</div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <div class="profile-section-title">Trust Badges</div>
+            <div class="trust-badges-row">
+              <div class="trust-badge active">📱 Phone</div>
+              <div class="trust-badge active">🛂 ID</div>
+              <div class="trust-badge active">🎓 School</div>
+              <div class="trust-badge">💼 Work</div>
+            </div>
+          </div>
+
+          <div class="profile-section" style="padding-bottom:20px;">
+            <div class="profile-section-title">Recent Activity</div>
+            <div style="background:#F8F8FA;border-radius:var(--radius-sm);padding:14px 16px;">
+              <div style="font-size:14px;color:var(--gray);">24 sessions completed</div>
+              <div style="font-size:14px;color:var(--gray);margin-top:4px;">Member since Jan 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Component System -->
+<div style="margin-top:80px;">
+  <h1 class="page-title">Components</h1>
+  <h2 class="section-title">Design System</h2>
+  <div style="background:white;border-radius:24px;padding:40px;max-width:900px;">
+
+    <!-- Colors -->
+    <div style="margin-bottom:40px;">
+      <div class="profile-section-title">Color Palette</div>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="width:64px;height:64px;background:#3B3EFF;border-radius:12px;margin-bottom:6px;"></div>
+          <div style="font-size:11px;color:var(--gray);font-family:'DM Mono',monospace;">#3B3EFF</div>
+          <div style="font-size:11px;font-weight:600;">Primary</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:64px;height:64px;background:#B4F000;border-radius:12px;margin-bottom:6px;"></div>
+          <div style="font-size:11px;color:var(--gray);font-family:'DM Mono',monospace;">#B4F000</div>
+          <div style="font-size:11px;font-weight:600;">Lime</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:64px;height:64px;background:#111111;border-radius:12px;margin-bottom:6px;"></div>
+          <div style="font-size:11px;color:var(--gray);font-family:'DM Mono',monospace;">#111111</div>
+          <div style="font-size:11px;font-weight:600;">Text</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:64px;height:64px;background:#6B6B6B;border-radius:12px;margin-bottom:6px;"></div>
+          <div style="font-size:11px;color:var(--gray);font-family:'DM Mono',monospace;">#6B6B6B</div>
+          <div style="font-size:11px;font-weight:600;">Secondary</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:64px;height:64px;background:#EEEEEE;border-radius:12px;margin-bottom:6px;"></div>
+          <div style="font-size:11px;color:var(--gray);font-family:'DM Mono',monospace;">#EEEEEE</div>
+          <div style="font-size:11px;font-weight:600;">Divider</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div style="margin-bottom:40px;">
+      <div class="profile-section-title">Buttons</div>
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:340px;margin-top:12px;">
+        <button class="btn-primary">Primary Button</button>
+        <button class="btn-outline">Secondary / Outline</button>
+        <button class="btn-lime">Lime CTA Button</button>
+        <button class="btn-disabled" disabled>Disabled State</button>
+      </div>
+    </div>
+
+    <!-- Chips -->
+    <div style="margin-bottom:40px;">
+      <div class="profile-section-title">Intent Chips</div>
+      <div class="chips" style="margin-top:12px;">
+        <div class="chip selected">☕ Coffee</div>
+        <div class="chip selected">🚶 Walk</div>
+        <div class="chip">📚 Study</div>
+        <div class="chip">💻 Work Sprint</div>
+        <div class="chip">💬 Chat</div>
+      </div>
+    </div>
+
+    <!-- Trust Badges -->
+    <div style="margin-bottom:40px;">
+      <div class="profile-section-title">Trust Badges</div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+        <div class="trust-badge active">📱 Phone Verified</div>
+        <div class="trust-badge active">🛂 ID Verified</div>
+        <div class="trust-badge active">🎓 School Verified</div>
+        <div class="trust-badge">💼 Work Verified</div>
+      </div>
+    </div>
+
+    <!-- Timer -->
+    <div style="margin-bottom:40px;max-width:340px;">
+      <div class="profile-section-title">45 Min Timer Component</div>
+      <div style="margin-top:12px;" class="timer-bar">
+        <div>
+          <div class="timer-label">Session ends in</div>
+          <div class="timer-value">29:14</div>
+        </div>
+        <div style="flex:1;margin:0 16px;">
+          <div class="timer-progress"><div class="timer-fill"></div></div>
+        </div>
+        <div style="font-size:12px;font-weight:600;opacity:0.8;">45 min</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
